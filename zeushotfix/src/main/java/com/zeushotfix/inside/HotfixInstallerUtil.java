@@ -36,7 +36,7 @@ final public class HotfixInstallerUtil {
                 currentMeta == null ||
                 HotfixMeta.getVersion() < 1 ||
                 HotfixMeta.getVersionCode() < 1 ||
-                HotfixMeta.getVersion() != currentMeta.getVersion() ||//如果补丁的version code小于当前版本则不加载补丁
+                HotfixMeta.getVersion() < currentMeta.getVersion() ||//如果补丁的version小于当前版本则不加载补丁
                 currentMeta.getVersionCode() > HotfixMeta.getVersionCode()) {//如果补丁的version code小于当前版本则不安装补丁
             return false;
         }
