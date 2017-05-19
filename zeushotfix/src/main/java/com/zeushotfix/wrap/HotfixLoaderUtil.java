@@ -78,6 +78,20 @@ final class HotfixLoaderUtil {
             }
             return loadApplication(applicationProxy, context);
         }
+
+        //如果优化后的odex文件不存在，则去优化odex文件，且当前不加载补丁,防止出现anr
+        if(!new File(Util.getInsideHotfixVersionPath(context, pathInfo)).exists()){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new DexClassLoader(Util.getHotfixApkPath(context, pathInfo),
+                            Util.getInsideHotfixVersionPath(context, pathInfo),
+                            "",
+                            context.getClassLoader().getParent());
+                }
+            }).start();
+            return loadApplication(applicationProxy, context);
+        }
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         Object packageInfo = Util.getField(context, "mPackageInfo");
         try {
