@@ -40,17 +40,17 @@ final public class HotfixInstallerUtil {
                 currentMeta.getVersionCode() > HotfixMeta.getVersionCode()) {//如果补丁的version code小于当前版本则不安装补丁
             return false;
         }
-        //进行签名校验
-        try {
-            Signature[] hotfixSignature = Util.getApkSignature(hotfixPath, context);
-            Signature[] currentSignature = Util.getPackageSignature(context.getPackageName(), context);
-            if (!hotfixSignature[0].equals(currentSignature[0])) {
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+//        //进行签名校验
+//        try {
+//            Signature[] hotfixSignature = Util.getApkSignature(hotfixPath, context);
+//            Signature[] currentSignature = Util.getPackageSignature(context.getPackageName(), context);
+//            if (!hotfixSignature[0].equals(currentSignature[0])) {
+//                return false;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
         //开始安装
         String pathInfo = String.valueOf(System.currentTimeMillis());
         //将补丁文件重命名到沙盒中

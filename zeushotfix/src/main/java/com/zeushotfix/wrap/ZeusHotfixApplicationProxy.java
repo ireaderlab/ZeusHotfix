@@ -13,6 +13,7 @@ public class ZeusHotfixApplicationProxy extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        CrashHandler.getInstance().init(this);
         realApplication = HotfixLoaderUtil.attachBaseContext(this, base);
     }
 
@@ -20,7 +21,6 @@ public class ZeusHotfixApplicationProxy extends Application {
     public void onCreate() {
         super.onCreate();
         realApplication.onCreate();
-        CrashHandler.getInstance().init(this);
     }
 
     @Override

@@ -155,15 +155,15 @@ final class HotfixLoaderUtil {
                 //降低线程优先级防止阻塞UI线程
                 Process.setThreadPriority(Process.THREAD_PRIORITY_LOWEST);
                 //进行签名校验，校验失败则杀死进程
-                try {
-                    Signature[] hotfixSignature = Util.getApkSignature(Util.getHotfixApkPath(context, pathInfo), context);
-                    Signature[] currentSignature = Util.getPackageSignature(context.getPackageName(), context);
-                    if (!hotfixSignature[0].equals(currentSignature[0])) {
-                        Process.killProcess(Process.myPid());
-                    }
-                } catch (Exception e) {
-                    Process.killProcess(Process.myPid());
-                }
+//                try {
+//                    Signature[] hotfixSignature = Util.getApkSignature(Util.getHotfixApkPath(context, pathInfo), context);
+//                    Signature[] currentSignature = Util.getPackageSignature(context.getPackageName(), context);
+//                    if (!hotfixSignature[0].equals(currentSignature[0])) {
+//                        Process.killProcess(Process.myPid());
+//                    }
+//                } catch (Exception e) {
+//                    Process.killProcess(Process.myPid());
+//                }
                 if (finalIsMainProcess) {
                     //记录主进程当前使用补丁版本
                     Util.writeString(Util.getOtherPathInfoPath(context, HOTFIX_NEW_PATHINFO_PATH), pathInfo);
